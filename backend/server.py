@@ -3,6 +3,7 @@ from flask import jsonify, request
 from main import *
 from bson.json_util import dumps
 import json
+import socket
 
 app = Flask(__name__)
 conn = connect()
@@ -19,7 +20,9 @@ def post():
 @app.route("/get", methods=['GET'])
 def get():
     documents = get_documents(db)
-    return jsonify(posts=json.loads(dumps(list(documents))))
+    res = json.loads(dumps(list(documents)))
+    res['hostname'] = socket.gethostname()
+    return jsonify(posts=res)
 
 if __name__ == "__main__":
     app.run()
