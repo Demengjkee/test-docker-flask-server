@@ -1,5 +1,7 @@
 FROM python:3.5-alpine
 
+MAINTAINER Mikalai Charopkin (ncherepkin@live.com)
+
 WORKDIR /opt
 
 ADD . /opt
